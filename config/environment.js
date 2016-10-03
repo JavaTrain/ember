@@ -12,6 +12,26 @@ module.exports = function(environment) {
         // e.g. 'with-controller': true
       }
     },
+    torii: {
+      providers: {
+        'google-oauth2-bearer': {
+          apiKey: '950791375127-mujesd1t22u7343inodacbgp96v8lui9.apps.googleusercontent.com',
+          redirectUri: 'http://localhost:4200',
+        },
+      }
+    },
+
+    contentSecurityPolicy: {
+      'connect-src': "'self' http://localhost:4500",
+    },
+
+    'simple-auth-token': {
+      serverTokenEndpoint: 'http://localhost:4500/get-token',
+    },
+
+    'simple-auth': {
+      authorizer: 'simple-auth-authorizer:token'
+    },
 
     APP: {
       // Here you can pass flags/options to your application instance
