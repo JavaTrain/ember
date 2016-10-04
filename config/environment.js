@@ -14,11 +14,16 @@ module.exports = function(environment) {
     },
     torii: {
       providers: {
-        'google-oauth2-bearer': {
+        'google-oauth2': {
           apiKey: '950791375127-mujesd1t22u7343inodacbgp96v8lui9.apps.googleusercontent.com',
           redirectUri: 'http://localhost:4200',
         },
       }
+    },
+    'google': {
+      apiKey: "950791375127-mujesd1t22u7343inodacbgp96v8lui9.apps.googleusercontent.com",
+      secret: "5PnCiRaeGuLazSrisvZ-1JDT",
+      redirect_uri: "http://localhost:4200"
     },
 
     contentSecurityPolicy: {
