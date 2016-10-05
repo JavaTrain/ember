@@ -9,7 +9,7 @@ export default Ember.Route.extend(/*ApplicationRouteMixin*/ {
     actions: {
         authenticate() {
             this.get('authManager').authenticate().then(() => {
-                this.get('router').transitionTo("messages");
+                this.get('router').transitionTo("messages.index");
             }, (err) => {
                 console.log(err);
                 this.get('flashMessages').danger('Authorisation Error!');

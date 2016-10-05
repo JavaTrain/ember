@@ -6,7 +6,7 @@ export default Ember.Route.extend({
     },
     actions: {
         saveMsg(newMsg){
-            newMsg.save().then(() => this.transitionTo('messages'));
+            newMsg.save().then(() => this.transitionTo('messages.index'));
         },
 
         willTransition(transition) {
