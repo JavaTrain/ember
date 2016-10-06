@@ -2,7 +2,9 @@ import DS from 'ember-data';
 
 export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
     attrs: {
-        comments: { embedded: 'always' }
+        comments: { embedded: 'always' },
+        serialize: 'records',
+        deserialize: 'records'
     },
     primaryKey: '_id',
     extractMeta: function(store, type, payload) {

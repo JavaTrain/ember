@@ -4,6 +4,18 @@ export default Ember.Route.extend({
     model(params){
         return this.get('store').findRecord('message', params.msg_id);
     },
+
+    setupController(controller, model) {
+        this._super(controller, model);
+
+        controller.set('title', 'Edit message');
+        controller.set('buttonLabel', 'Save changes');
+    },
+
+    renderTemplate() {
+        this.render('messages/form');
+    },
+
     actions: {
         saveMsg(newMsg){
             newMsg.save().then(() => this.transitionTo('messages.index'));

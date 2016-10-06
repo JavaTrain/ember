@@ -14,15 +14,6 @@ export default Ember.Route.extend({
 
     model(params) {
         return this.get('store').query('message', params);
-    },
-
-    actions: {
-        deleteMsg(message) {
-            let confirmation = confirm('Are you sure?');
-
-            if (confirmation) {
-                message.destroyRecord();
-            }
-        }
     }
+
 });
