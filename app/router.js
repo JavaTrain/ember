@@ -14,6 +14,7 @@ Router.map(function() {
   this.route('message', {path: 'messages/:msg_id'});
   this.route('comments');
   this.route('login');
+  this.route('users');
 });
 
 export default Router;

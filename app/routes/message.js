@@ -1,6 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+    authManager: Ember.inject.service(),
+    authUser: Ember.inject.service(),
+
 
     model(params){
         return this.get('store').findRecord('message', params.msg_id);
@@ -10,7 +13,9 @@ export default Ember.Route.extend({
     },
     actions: {
         saveComment(commentMsg, msg){
-            let comment = this.get('store').createRecord('comment', {message: msg});
+            var user = this.get('authUser').getUser();
+
+            let comment = this.get('store').createRecord('comment', {message: msg, user: user});
             comment.set('comment', commentMsg);
             comment.save();
         }

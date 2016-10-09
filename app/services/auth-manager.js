@@ -1,11 +1,11 @@
 import Ember from 'ember';
 import config from './../config/environment';
 
-
 export default Ember.Service.extend({
     torii: Ember.inject.service(),
     store: Ember.inject.service(),
     accessToken: null,
+    payload: null,
 
     initializeFromLocalStorage: function () {
         let accessToken = localStorage.getItem('accessToken');
@@ -18,6 +18,7 @@ export default Ember.Service.extend({
     setAccessToken: function (accessToken) {
         this.set('accessToken', accessToken);
         localStorage.setItem('accessToken', accessToken);
+        this.set('payload', JSON.parse(window.atob(accessToken.split('.')[1])));
     },
 
     getAuthCode() {
@@ -50,7 +51,7 @@ export default Ember.Service.extend({
                         response => {
                             Ember.$.ajax({
                                 type: 'GET',
-                                url: 'http://localhost:3000/api/v1/users/login_with_google_token' + '?access_token=' + response.access_token,
+                                url: 'http://localhost:3000/api/v1/users/login/login_with_google_token' + '?access_token=' + response.access_token,
                                 dataType: 'json'
                             }).then(result => {
                                 this.setAccessToken(result.token);
@@ -70,7 +71,7 @@ export default Ember.Service.extend({
         });
     },
 
-    invalidate() {
+    logout() {
         this.set('accessToken', null);
         localStorage.removeItem('accessToken');
     },
