@@ -1,30 +1,3 @@
-<h1>{{model.title}}</h1>
-<p>{{{model.content}}}</p>
+{{msg-show message=model ckeditorConfig=ckeditorConfig}}
 
-{{#if model.comments}}
-    <h3>Comments: {{model.comments.length}}</h3>
-    ************************************
-    {{#each model.comments as |comment|}}
-        <p>{{{comment.comment}}}</p>
-        <hr />
-    {{/each}}
-{{/if}}
-
-<div>
-    <h2>Write a comment</h2>
-    <div class="form-group">
-        <div class="col-sm-10">
-            {{ember-cli-ckeditor
-                value=commentMsg
-                ckeditorConfig=ckeditorConfig
-                externalPlugins=externalCkeditorPlugins
-            }}
-        </div>
-    </div>
-</div>
-<div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-default" {{action 'saveComment' commentMsg model}}>Post comment</button>
-    </div>
-</div>
 {{outlet}}

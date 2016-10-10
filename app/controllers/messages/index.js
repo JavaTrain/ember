@@ -29,10 +29,6 @@ export default Ember.Controller.extend({
             }else {
                 this.set('page', page - 1);
             }
-        },
-        limitUp(){
-            let limit = this.get('limit');
-            this.set('limit', limit + 1);
         }
     }
 });

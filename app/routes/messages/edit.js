@@ -10,6 +10,11 @@ export default Ember.Route.extend({
 
         controller.set('title', 'Edit message');
         controller.set('buttonLabel', 'Save changes');
+        controller.set('ckeditorConfig', {
+            filebrowserImageUploadUrl : 'http://localhost:3000/api/v1/messages/upload/',
+            extraPlugins : ['uploadimage', 'smiley'],
+            uploadUrl: 'http://noadress',
+        });
     },
 
     renderTemplate() {

@@ -1,11 +1,9 @@
 <ul>
-    {{#each messages as |msg|}}
-        {{#link-to "message" msg}}<li>{{msg.title}}</li>{{/link-to}}
-        <div>{{{msg.content}}}</div>
-        <div class="panel-footer text-right">
-            {{#link-to 'messages.edit' msg class='btn btn-success btn-xs'}}Edit{{/link-to}}
-            <button class="btn btn-danger btn-xs" {{action 'deleteMsg' msg}}>Delete</button>
-        </div>
-    {{/each}}
+    {{#link-to "message" msg}}<li>{{msg.title}}</li>{{/link-to}}
+    <div>{{{msg.content}}}</div>
+    <div class="panel-footer text-right">
+        {{#link-to 'messages.edit' msg class='btn btn-success btn-xs'}}Edit{{/link-to}}
+        <button class="btn btn-danger btn-xs" {{action 'deleteMsg' msg}}>Delete</button>
+    </div>
 </ul>
 {{yield}}

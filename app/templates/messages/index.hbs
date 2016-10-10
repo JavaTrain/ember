@@ -2,5 +2,7 @@
 <div class="container">
     <a href="#" class="left btn" {{action "prevPage"}}>&lt; Prev</a>
     <a href="#" class="right btn" {{action "nextPage"}}> Next&gt;</a>
-    {{msg-item messages=model}}
+    {{#each model as |message|}}
+        {{msg-item msg=message}}
+    {{/each}}
 </div>
