@@ -33,8 +33,9 @@ export default Ember.Component.extend({
         saveComment(commentMsg, msg){
             var user = this.get('authUser').getUser();
 
-            let comment = this.get('store').createRecord('comment', {message: msg, user: user});
+            let comment = this.get('store').createRecord('comment', {message: msg});
             comment.set('comment', commentMsg);
+            // comment.set('commentedBy', user);
             comment.save();
         },
         deleteComment(comment){

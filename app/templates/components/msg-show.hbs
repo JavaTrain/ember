@@ -1,6 +1,22 @@
 <h1>{{message.title}}</h1>
 <p>{{{message.content}}}</p>
 
+{{#if message.files}}
+    {{#each message.files as |file|}}
+        <div>
+            <img alt="{{file.originalName}}" src="{{file.link}}" />
+            <span {{action 'deleteFile' file }}>X</span>
+        </div>
+    {{/each}}
+{{/if}}
+
+
+
+
+<input type="file" class="upload" />
+
+<img src="" class="preview" >
+
 <div>
     {{comment-item comments=message.comments message=message}}
 </div>

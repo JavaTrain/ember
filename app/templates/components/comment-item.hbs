@@ -6,31 +6,6 @@
         <button {{action 'deleteComment' comment}}>Delete {{comment.id}}</button>
         <button {{action 'editComment' comment}}>Edit</button>
 
-
-        {{#pl-uploader for="upload-image" extensions="jpg jpeg png gif" onfileadd="uploadImage" as |queue dropzone|}}
-            <div class="dropzone" id={{dropzone.id}}>
-                {{#if dropzone.active}}
-                    {{#if dropzone.valid}}
-                        Drop to upload
-                    {{else}}
-                        Invalid
-                    {{/if}}
-                {{else if queue.length}}
-                    Uploading {{queue.length}} files. ({{queue.progress}}%)
-                {{else}}
-                    <h4>Upload Images</h4>
-                    <p>
-                        {{#if dropzone.enabled}}
-                            Drag and drop images onto this area to upload them or
-                        {{/if}}
-                        <a id="upload-image">Add an Image.</a>
-                    </p>
-                {{/if}}
-            </div>
-        {{/pl-uploader}}
-
-
-
         {{# if (eq comment.id editComment)}}
             <h2>Edit a comment</h2>
             <div class="form-group">

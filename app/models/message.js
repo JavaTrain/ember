@@ -6,6 +6,7 @@ export default DS.Model.extend({
     content: DS.attr('string'),
     postedBy: DS.belongsTo('user'),
     comments: DS.hasMany('comment'),
+    files: DS.hasMany('file'),
 
     isValid: (Ember.computed.notEmpty('title') && Ember.computed.notEmpty('content'))
 });
