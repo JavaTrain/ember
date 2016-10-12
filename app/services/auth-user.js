@@ -13,7 +13,7 @@ export default Ember.Service.extend({
         // console.log(this.get('authManager').payload.aud);
         return new Ember.RSVP.Promise((resolve, reject) => {
             this.get('store').findRecord('user', this.get('authManager').payload.aud).then(result => {
-                resolve(result);
+                return resolve(result);
             }, (error) => {
                 reject(error);
             });
@@ -22,11 +22,12 @@ export default Ember.Service.extend({
     /**
      * Set information about authorized users on init
      */
-    // _setInfo: function () {
-    //     this.getUser().then(user => {
-    //         this.set('info', user);
-    //     }, () => {
-    //         this.get('authManager').invalidate();
-    //     });
-    // }.on('init')
+    _setInfo: function () {
+        console.log('init');
+        this.getUser().then(user => {
+            this.set('info', user);
+        }, () => {
+            //this.get('authManager').invalidate();
+        });
+    }.on('init')
 });

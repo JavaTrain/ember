@@ -5,6 +5,8 @@ const set = Ember.set;
 
 export default Ember.Component.extend({
     store: Ember.inject.service(),
+    authUser: Ember.inject.service(),
+
     didInsertElement() {
         this._super(...arguments);
         let store = this.get('store');
@@ -61,14 +63,31 @@ export default Ember.Component.extend({
                 file.destroyRecord();
             }
         },
-        likeMessage(){
+        likeMessage() {
+            let userId = null;
+           
+            console.log(this.get('authUser').get('info'));
+            return;
+
+            // Promise.resolve(user).then(result => {
+            //     console.log(result.get('id'));
+            // })
+
+
+
             let like = this.get('store').createRecord('like', {
                 message: this.get('message')
             });
 
-            console.log(this.get('message').get('likes'));
+            // console.log(this.get('message').get('likes').get('firstObject').get('likeBy').get('id'));
+
+            this.get('message').get('likes').forEach(function(item) {
+                console.log(item.get('id'))
+            });
+
 
             return;
+            // return;
 
             like.save();
         }
