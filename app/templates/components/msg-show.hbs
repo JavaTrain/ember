@@ -6,16 +6,20 @@
         <div>
             <img alt="{{file.originalName}}" src="{{file.link}}" />
             <span {{action 'deleteFile' file }}>X</span>
+            <span>{{file.id}}</span>
         </div>
     {{/each}}
 {{/if}}
 
-
+<br>
+    <span {{action 'likeMessage'}}>Likes: {{if message.likes.length message.likes.length 0}}</span>
+<br>
+<br>
 
 
 <input type="file" class="upload" />
-
 <img src="" class="preview" >
+<button style="display: none" class="btn-upload" {{!--action 'uploadServer'--}}>Upload</button>
 
 <div>
     {{comment-item comments=message.comments message=message}}

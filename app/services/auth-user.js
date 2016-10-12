@@ -10,7 +10,7 @@ export default Ember.Service.extend({
      * @returns {Ember.RSVP.Promise}
      */
     getUser: function () {
-        console.log(this.get('authManager').payload.aud);
+        // console.log(this.get('authManager').payload.aud);
         return new Ember.RSVP.Promise((resolve, reject) => {
             this.get('store').findRecord('user', this.get('authManager').payload.aud).then(result => {
                 resolve(result);
