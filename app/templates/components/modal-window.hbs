@@ -1,0 +1,10 @@
+{{#modal-dialog close="toggleModal" targetAttachment="none" translucentOverlay=true container-class=modalSize overlay-class="modal-backdrop"}}
+    <div class="modal-content">
+        <div class="modal-header rte">
+            <button type="button" class="close" {{action "toggleModal"}}>×</button>
+            {{#if header}}<h2 class="modal-title">{{header}}</h2>{{/if}}
+        </div>
+        {{yield}}
+    </div>
+{{/modal-dialog}}
+

@@ -3,6 +3,9 @@
   "dependencies": {
     "ember": "~2.8.0",
     "ember-cli-shims": "0.1.1",
-    "ckeditor": "^4.5.11"
+    "ckeditor": "^4.5.11",
+    "jquery.inputmask": "^3.3.3",
+    "moment": "^2.15.1",
+    "bootstrap": "~3.3.5"
   }
 }

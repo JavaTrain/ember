@@ -4,9 +4,16 @@ export default DS.RESTSerializer.extend({
     primaryKey: '_id',
 
     normalizeResponse: function(store, primaryModelClass, payload, id, requestType) {
-        let cnt = payload.likes.length-1,
-            data = {file: payload.likes[cnt]};
+        if(requestType == 'createRecord'){
+            let cnt = payload.likes.length;
+            if (cnt > 0){
+                payload = {like: payload.likes[cnt-1]};
+            }
+        }
+        if(requestType == 'deleteRecord'){
+            payload = {};
+        }
 
-        return this._super(store, primaryModelClass, data, id, requestType);
+        return this._super(store, primaryModelClass, payload, id, requestType);
     },
 });

@@ -16,17 +16,17 @@ export default Ember.Controller.extend({
         nextPage(){
             let pagination = Ember.get(this.store.peekAll('message'), 'pagination');
             let page = this.get('page');
-            if(page >= pagination.pages){
+            if (page >= pagination.pages) {
                 this.set('page', pagination.pages);
-            }else {
+            } else {
                 this.set('page', page + 1);
             }
         },
         prevPage(){
             let page = this.get('page');
-            if(page <= 1){
+            if (page <= 1) {
                 this.set('page', 1);
-            }else {
+            } else {
                 this.set('page', page - 1);
             }
         }

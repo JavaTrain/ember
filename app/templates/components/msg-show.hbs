@@ -3,23 +3,28 @@
 
 {{#if message.files}}
     {{#each message.files as |file|}}
-        <div>
-            <img alt="{{file.originalName}}" src="{{file.link}}" />
-            <span {{action 'deleteFile' file }}>X</span>
-            <span>{{file.id}}</span>
+        <div class="clearfix">
+            <div style="float: left" >
+                <img style="max-height: 100px; max-width: 100px" alt="{{file.originalName}}" src="{{file.link}}" />
+                <span {{action 'deleteFile' file }}>X</span>
+            </div>
         </div>
     {{/each}}
 {{/if}}
 
 <br>
-    <span {{action 'likeMessage'}}>Likes: {{if message.likes.length message.likes.length 0}}</span>
+    <span {{action 'likeMessage'}}>Likes: {{message.likes.length}}</span>
 <br>
 <br>
 
+{{#modal-window}}
+    Hello!!!!!!!!!
+{{/modal-window}}
 
-<input type="file" class="upload" />
+
+<input type="file" class="upload"/>
 <img src="" class="preview" >
-<button style="display: none" class="btn-upload" {{!--action 'uploadServer'--}}>Upload</button>
+<button style="display: none" class="btn-upload">Upload</button>
 
 <div>
     {{comment-item comments=message.comments message=message}}

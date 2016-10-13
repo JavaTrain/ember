@@ -1,0 +1,15 @@
+<div class="jarviswidget jarviswidget-sortable">
+    <header role="heading">
+        <a {{ action "back" }} class="btn btn-labeled btn-back"> <span class="btn-label"><i
+                class="glyphicon glyphicon-chevron-left"></i></span></a>
+    </header>
+    <div role="content">
+        <div class="jarviswidget-editbox">
+        </div>
+        <div class="widget-body no-padding">
+            {{ profile-form user=user editable=isAdmin isAdmin=isAdmin }}
+        </div>
+    </div>
+</div>
+
+{{yield}}

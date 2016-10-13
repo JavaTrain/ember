@@ -1,0 +1,23 @@
+<td>
+    {{#link-to "users.user" user }}
+        <div class="avatar-wrapper img-circle">
+            <img src="{{get-file user.image width=40 height=40}}" height="40" alt="img">
+        </div>
+    {{/link-to}}
+</td>
+<td>
+    {{#link-to "users.user" user }}
+        {{user.lastname}} {{user.firstname}}
+    {{/link-to }}
+</td>
+<td>
+    {{#link-to "users.user" user}}
+        {{user.email}}
+    {{/link-to}}
+</td>
+<td>
+    {{format-phone user.phone}}
+</td>
+
+
+{{yield}}

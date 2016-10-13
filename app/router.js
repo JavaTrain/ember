@@ -14,7 +14,10 @@ Router.map(function() {
   this.route('message', {path: 'messages/:msg_id'});
   this.route('comments');
   this.route('login');
-  this.route('users');
+  this.route('users', function() {
+    this.route('user', {path: 'users/:user_id'});
+  });
+  this.route('profile');
 });
 
 export default Router;

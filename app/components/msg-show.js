@@ -16,11 +16,11 @@ export default Ember.Component.extend({
             if(!this.value) {
                 return;
             }
-            $('.btn-upload').css({display: 'block'});
+            Ember.$('.btn-upload').css({display: 'block'});
             if(this.files && this.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $('.preview').attr('src', e.target.result);
+                    Ember.$('.preview').attr('src', e.target.result);
                 };
                 reader.readAsDataURL(this.files[0]);
             }
@@ -41,9 +41,9 @@ export default Ember.Component.extend({
                    reader = new FileReader();
 
                 reader.onload = function (e) {
-                    $('.preview').attr('src', '');
-                    $('.upload').val('');
-                    $('.btn-upload').css({display: 'none'});
+                    Ember.$('.preview').attr('src', '');
+                    Ember.$('.upload').val('');
+                    Ember.$('.btn-upload').css({display: 'none'});
                     file.set('link', reader.result);
                     file.save();
                 };
@@ -51,7 +51,7 @@ export default Ember.Component.extend({
             }
         };
         this.$('.btn-upload').click(function (e) {
-            upload($('.upload')[0],message,store);
+            upload(Ember.$('.upload')[0],message,store);
         });
     },
 
@@ -64,32 +64,22 @@ export default Ember.Component.extend({
             }
         },
         likeMessage() {
-            let userId = null;
-           
-            console.log(this.get('authUser').get('info'));
-            return;
-
-            // Promise.resolve(user).then(result => {
-            //     console.log(result.get('id'));
-            // })
-
-
-
-            let like = this.get('store').createRecord('like', {
-                message: this.get('message')
+            this.get('authUser').getUser().then(user => {
+                let liked = false;
+                this.get('message').get('likes').forEach(function(item) {
+                    if(user.get('id') == item.get('likeBy').get('id')){
+                        liked = true;
+                    }
+                });
+                if(liked){
+                    console.log('ALREADY LIKED');
+                    return;
+                }
+                let like = this.get('store').createRecord('like', {
+                    message: this.get('message')
+                });
+                like.save();
             });
-
-            // console.log(this.get('message').get('likes').get('firstObject').get('likeBy').get('id'));
-
-            this.get('message').get('likes').forEach(function(item) {
-                console.log(item.get('id'))
-            });
-
-
-            return;
-            // return;
-
-            like.save();
         }
     }
 });

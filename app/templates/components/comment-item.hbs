@@ -1,9 +1,8 @@
 {{#if comments}}
     <h3>Comments: {{comments.length}}</h3>
-    ***********************************************
     {{#each comments as |comment|}}
         <p>{{{comment.comment}}}</p>
-        <button {{action 'deleteComment' comment}}>Delete {{comment.id}}</button>
+        <button {{action 'deleteComment' comment}}>Delete</button>
         <button {{action 'editComment' comment}}>Edit</button>
 
         {{# if (eq comment.id editComment)}}

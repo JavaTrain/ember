@@ -8,8 +8,6 @@ export default Ember.Component.extend({
     store: Ember.inject.service(),
     editComment: null,
 
-
-
     /*
      * Ckeditor configuration
      */
@@ -31,12 +29,14 @@ export default Ember.Component.extend({
 
     actions: {
         saveComment(commentMsg, msg){
-            var user = this.get('authUser').getUser();
-
-            let comment = this.get('store').createRecord('comment', {message: msg});
-            comment.set('comment', commentMsg);
-            // comment.set('commentedBy', user);
-            comment.save();
+            this.get('authUser').getUser().then(res => {
+                let comment = this.get('store').createRecord('comment', {
+                    message: msg,
+                    commentedBy: res,
+                    comment: commentMsg
+                });
+                comment.save();
+            });
         },
         deleteComment(comment){
             let confirmation = confirm('Are you sure?');
@@ -56,27 +56,5 @@ export default Ember.Component.extend({
             comment.save();
             this.set('editComment', null);
         },
-
-        uploadImage: function (file) {
-            var product = this.modelFor('product');
-            var image = this.store.createRecord('image', {
-                product: product,
-                filename: get(file, 'name'),
-                filesize: get(file, 'size')
-            });
-
-            file.read().then(function (url) {
-                if (get(image, 'url') == null) {
-                    set(image, 'url', url);
-                }
-            });
-
-            file.upload('http://localhost:3000/api/v1/messages/upload').then(function (response) {
-                set(image, 'url', response.headers.Location);
-                return image.save();
-            }, function () {
-                image.rollback();
-            });
-        }
     }
 });

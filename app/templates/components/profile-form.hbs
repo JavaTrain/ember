@@ -1,0 +1,74 @@
+<p>Hello, {{user.username}}</p>
+
+<form {{action 'saveProfile' user on='submit'}} novalidate="novalidate">
+    <fieldset >
+        <div class="row">
+            <div class="col-sm-5">
+                <div class="profile-img-container uploadButton">
+                    <input type="file" class="form-control" id="file" {{action "inputFileChange" on="change"}}>
+                    <label for="file" class="input input-file">
+                        <img class="profile-photo" src="{{get-file user.image}}" title="Photo" alt="photo">
+                        <div class="profile-img-i-container">
+                            <i class="fa fa-camera fa-2x"></i>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-7">
+                <div class="form-group">
+                    <label class="cursor-default">Username</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        {{input value=user.username class="form-control" placeholder="Username" disabled='disabled'}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="cursor-default">Email</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        {{input value=user.email class="form-control" placeholder="Email" disabled='disabled'}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="cursor-default">First name</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        {{input value=user.firstname class="form-control" placeholder="First name" }}
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="cursor-default">Last name </label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        {{input value=user.lastname class="form-control" placeholder="Last name" }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="cursor-default">Phone</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                        {{input-mask mask="+38(999)-999-99-99" value=user.phoneMask class="form-control" type="tel" placeholder="Phone"}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="cursor-default">Gender</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-venus-mars"></i></span>
+                        {{#x-select value=user.gender class="js-select form-control" disabled=isNotEditable}}
+                            {{#x-option value='m'}}male{{/x-option}}
+                            {{#x-option value='f'}}female{{/x-option}}
+                        {{/x-select}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <footer>
+        <button type="submit" class="btn btn-primary" {{action 'saveProfile' user}}>
+            Save
+        </button>
+    </footer>
+</form>
+
+{{yield}}
