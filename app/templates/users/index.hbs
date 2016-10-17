@@ -1,36 +1,27 @@
-<div id="content">
-    <section id="widget-grid" class="">
-        <div class="row">
-            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
-                <div class="jarviswidget jarviswidget-color-darken jarviswidget-sortable" id="wid-id-0">
-                    <header role="heading">
-                        <h2>All users</h2>
-                    </header>
-                    <div role="content">
-                        <div class="widget-body no-padding">
-                            <div id="dt_basic_wrapper" class="dataTables_wrapper form-inline no-footer">
-                                <div class="input-group dataTables_filter col-sm-12">
-                                    <span class="input-group-addon" id="basic-addon1"><i
-                                            class="fa fa-search"></i></span>
-                                    {{!-- input value=filter key-up=(action 'search') class='form-control' placeholder='Search' --}}
-                                </div>
-                                <div class="tableWrap table-responsive">
-                                    <table id="dt_basic"
-                                           class="table table-bordered table-hover dataTable no-footer has-columns-hidden users-table">
-                                        {{ users-table-header sort=(action 'sort') }}
-                                        <tbody>
-                                        {{#each model as |user|}}
-                                            {{users-table-row tagName="tr" user=user}}
-                                        {{/each}}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </div>
-    </section>
+<div class="container">
+    <a href="#" class="left btn" {{action "prevPage"}}>&lt; Prev</a>
+    <a href="#" class="right btn" {{action "nextPage"}}> Next&gt;</a>
 </div>
+<div role="content">
+    <div class="widget-body no-padding">
+        <div id="dt_basic_wrapper" class="dataTables_wrapper form-inline no-footer">
+            <div class="input-group dataTables_filter col-sm-12">
+                <span class="input-group-addon" id="basic-addon1"><i class="fa fa-search"></i></span>
+                {{!--input value=filter key-up=(action 'search') class='form-control' placeholder='Search'--}}
+            </div>
+            <div class="tableWrap table-responsive">
+                <table id="dt_basic"
+                       class="table table-bordered table-hover dataTable no-footer has-columns-hidden users-table">
+                    {{users-table-header sort=(action 'sort')}}
+                    <tbody>
+                        {{#each model as |user|}}
+                            {{users-table-row tagName="tr" user=user}}
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
 {{outlet}}

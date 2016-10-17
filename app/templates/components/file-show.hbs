@@ -1,0 +1,15 @@
+<div class="clearfix">
+    <div style="float: left" >
+        <img style="max-height: 100px; max-width: 100px" alt="{{file.originalName}}" src="{{file.link}}" />
+        <span {{action 'toggleModal' file }}>X</span>
+    </div>
+</div>
+{{#if isShowingModal}}
+    {{#modal-window close="toggleModal" toggleModal=(action "toggleModal") size="md" header="Are you sure to delete the file?"}}
+        <div class="modal-footer">
+            <button {{action 'submitModal'}} data-dismiss="modal" class="btn btn-primary">Ok</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" {{action 'toggleModal'}}>Close</button>
+        </div>
+    {{/modal-window}}
+{{/if}}
+{{yield}}

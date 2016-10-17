@@ -1,11 +1,27 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-    model(){
-        return this.get('store').query('user', {sort: 'lastname'});
+    queryParams: {
+        page: {
+            as: 'page',
+            refreshModel: true
+        },
+        limit: {
+            as: 'limit',
+            refreshModel: true
+        },
+        sort: {
+            as: 'sortBy',
+            refreshModel: true
+        }
     },
 
-    sortBy: 'last-name',
+    model(params) {
+        console.log(params);
+        return this.get('store').query('user', params);
+    },
+
+    sortBy: 'lastname',
     store: Ember.inject.service(),
     filterUsers: function() {
         return this.get('store').query('user',

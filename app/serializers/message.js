@@ -13,6 +13,6 @@ export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
         if (payload && payload.meta) {
             this.store.peekAll('message').set('pagination', payload.meta.pagination);
         }
-        delete payload.meta;
+        // delete payload.meta;
     }
 });

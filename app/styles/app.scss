@@ -12,3 +12,16 @@
 .clearfix {
     display: inline-block;
 }
+
+//.ember-modal-dialog{
+//    width: 400px;
+//    height: 200px;
+//}
+.modal-backdrop {
+    background-color: rgba(0,0,0,.8);
+    overflow-y: auto;
+}
+
+.modal-dialog {
+    position: relative;
+}

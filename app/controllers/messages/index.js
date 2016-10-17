@@ -1,17 +1,18 @@
 import Ember from 'ember';
 
+
 export default Ember.Controller.extend({
     // store: Ember.inject.service(),
-    queryParams: [
-        'page',
-        'limit'
-    ],
+    // queryParams: [
+    //     'page',
+    //     'limit'
+    // ],
     page: 1, // default
     limit: 2,
-    metaData: Ember.computed('model', function(){
-        let pagination = this.store.peekAll('message');
-      return Ember.get(pagination, 'pagination');
-    }),
+    // metaData: Ember.computed('model', function(){
+    //     let pagination = this.store.peekAll('user');
+    //   return Ember.get(pagination, 'pagination');
+    // }),
     actions: {
         nextPage(){
             let pagination = Ember.get(this.store.peekAll('message'), 'pagination');

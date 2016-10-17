@@ -7,7 +7,7 @@ export default Ember.Helper.extend({
         if (url) {
             return url;
         } else {
-            return 'assets/img/no-avatar.png';
+            return 'http://localhost:3000/img/no-avatar.png';
         }
 
     }
