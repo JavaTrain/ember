@@ -7,10 +7,7 @@
                 <div class="profile-img-container uploadButton">
                     <input type="file" class="form-control" id="file" {{action "inputFileChange" on="change"}}>
                     <label for="file" class="input input-file">
-                        <img class="profile-photo" src="{{get-file user.image}}" title="Photo" alt="photo">
-                        <div class="profile-img-i-container">
-                            <i class="fa fa-camera fa-2x"></i>
-                        </div>
+                        <img style="max-width: 300px; max-height: 300px" class="profile-photo" src="{{get-file user.image}}" title="Photo" alt="photo">
                     </label>
                 </div>
             </div>
@@ -70,5 +67,9 @@
         </button>
     </footer>
 </form>
+
+{{#if isShowingCropperModal }}
+    {{cropper-modal img=img toggleModal=(action "toggleCropperModal") setImage=(action "setImage")}}
+{{/if}}
 
 {{yield}}

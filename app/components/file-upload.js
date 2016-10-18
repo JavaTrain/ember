@@ -71,8 +71,9 @@ export default Ember.Component.extend({
                         size: get(el.files[0], 'size'),
                         mimeType: get(el.files[0], 'type'),
                         message: msg
-                    }),
-                    reader = new FileReader();
+                }),
+
+                reader = new FileReader();
 
                 reader.onload = function (e) {
                     Ember.$('.preview').attr('src', '');

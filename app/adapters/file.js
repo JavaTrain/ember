@@ -6,9 +6,11 @@ export default ApplicationAdapter.extend({
         var data = this.serialize(snapshot, {includeId: true});
 
         return new Ember.RSVP.Promise(function (resolve, reject) {
+            var url = data.message?'http://localhost:3000/api/v1/messages/'+data.message+'/files':
+                                    'http://localhost:3000/api/v1/users/'+data.user+'/avatar';
             Ember.$.ajax({
                 type: 'POST',
-                url: 'http://localhost:3000/api/v1/messages/' + data.message + '/files',
+                url: url,
                 headers: {'x-access-token': localStorage.getItem('accessToken')},
                 dataType: 'json',
                 data: data

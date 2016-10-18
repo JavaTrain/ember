@@ -1,0 +1,11 @@
+{{#modal-window close="toggleModal" header="Please select an area for your profile picture." toggleModal=(action "toggleModal")}}
+    <div class="modal-body">
+        <div class="image-holder"></div>
+        <div class="canvas-holder"></div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" {{action "toggleModal"}}>Cancel</button>
+        <button type="button" class="btn btn-primary" {{action "crop"}}>Crop</button>
+    </div>
+{{/modal-window}}
+{{yield}}
