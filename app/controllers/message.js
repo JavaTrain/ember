@@ -1,6 +1,15 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+    authUser: Ember.inject.service('authUser'),
+    userId:null,
+    user: function () {
+        return this.get('authUser').getUser().then(user => {
+            this.set('userId', user.id);
+            return user;
+        });
+        // return //this.authUser.getUser();
+    }.on('init'),
     /*
      * Ckeditor configuration
      */
@@ -19,4 +28,9 @@ export default Ember.Controller.extend({
             pluginPath:'/path/to/external/plugin'
         }
     ],
+    actions: {
+        init: function() {
+            alert('Name is');
+        }
+    }
 });

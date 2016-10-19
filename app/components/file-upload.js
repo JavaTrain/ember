@@ -12,7 +12,7 @@ export default Ember.Component.extend({
         let store = this.get('store');
         var self = this;
         const message = this.get('message');
-        this.$('.upload').change(function (e) {
+        this.$('.upload').change(function (e) { /// move to action
             e.stopPropagation();
             if(!this.value) {
                 return;

@@ -1,7 +1,5 @@
-<h2>List {{metaData.total}}</h2>
+<h2>List</h2>
 <div class="container">
-    <a href="#" class="left btn" {{action "prevPage"}}>&lt; Prev</a>
-    <a href="#" class="right btn" {{action "nextPage"}}> Next&gt;</a>
     {{#each model as |message|}}
         {{msg-item msg=message}}
     {{/each}}

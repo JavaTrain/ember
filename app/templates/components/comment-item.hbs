@@ -1,9 +1,12 @@
 {{#if comments}}
+    <h1>{{user.firstname}}</h1>
     <h3>Comments: {{comments.length}}</h3>
     {{#each comments as |comment|}}
         <p>{{{comment.comment}}}</p>
-        <button {{action 'deleteComment' comment}}>Delete</button>
-        <button {{action 'editComment' comment}}>Edit</button>
+        {{# if (eq comment.commentedBy.id userId)}}
+            <button {{action 'deleteComment' comment}}>Delete</button>
+            <button {{action 'editComment' comment}}>Edit</button>
+        {{/if}}
 
         {{# if (eq comment.id editComment)}}
             <h2>Edit a comment</h2>

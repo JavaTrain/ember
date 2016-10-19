@@ -9,10 +9,10 @@ export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
         // deserialize: 'records'
     },
     primaryKey: '_id',
-    extractMeta: function(store, type, payload) {
-        if (payload && payload.meta) {
-            this.store.peekAll('message').set('pagination', payload.meta.pagination);
-        }
+    // extractMeta: function(store, type, payload) {
+        // if (payload && payload.meta) {
+        //     this.store.peekAll('message').set('pagination', payload.meta.pagination);
+        // }
         // delete payload.meta;
-    }
+    // }
 });

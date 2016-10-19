@@ -19,6 +19,20 @@ export default Ember.Service.extend({
         this.set('accessToken', accessToken);
         localStorage.setItem('accessToken', accessToken);
         this.set('payload', JSON.parse(window.atob(accessToken.split('.')[1])));
+        setInterval(function(){
+            Ember.$.ajax({
+                type: 'POST',
+                url: 'http://localhost:3000/api/v1/users/refresh-token',
+                headers: {'x-access-token': localStorage.getItem('accessToken')},
+                dataType: 'json'
+            }).then(result => {
+                localStorage.setItem('accessToken', result.token);
+                this.set('accessToken', result.token);
+                this.set('payload', JSON.parse(window.atob(result.token.split('.')[1])));
+            }, error => {
+                // reject(error);
+            });
+        }, 120000);
     },
 
     getAuthCode() {

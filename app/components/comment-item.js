@@ -29,12 +29,13 @@ export default Ember.Component.extend({
 
     actions: {
         saveComment(commentMsg, msg){
-            this.get('authUser').getUser().then(res => {
+            this.get('authUser').getUser().then(user => {
                 let comment = this.get('store').createRecord('comment', {
                     message: msg,
-                    commentedBy: res,
+                    commentedBy: user,
                     comment: commentMsg
                 });
+
                 comment.save();
             });
         },

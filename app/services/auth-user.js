@@ -10,7 +10,6 @@ export default Ember.Service.extend({
      * @returns {Ember.RSVP.Promise}
      */
     getUser: function () {
-        // console.log(this.get('authManager').payload.aud);
         return new Ember.RSVP.Promise((resolve, reject) => {
             this.get('store').findRecord('user', this.get('authManager').payload.aud).then(result => {
                 return resolve(result);
@@ -23,7 +22,6 @@ export default Ember.Service.extend({
      * Set information about authorized users on init
      */
     _setInfo: function () {
-        console.log('init');
         this.getUser().then(user => {
             this.set('info', user);
         }, () => {
