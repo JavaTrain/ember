@@ -3,11 +3,14 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
     queryParams: [
         'page',
-        'limit'
+        'limit',
+        'sortBy',
+        'dir'
     ],
     page: 1, // default
     limit: 2,
     sortBy: 'lastname',
+    dir: 'asc',
     store: Ember.inject.service(),
     filterUsers: function() {
         return this.get('store').query('user',

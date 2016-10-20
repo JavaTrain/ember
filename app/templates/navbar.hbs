@@ -11,10 +11,14 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li>{{#link-to 'messages'}}Home{{/link-to}}</li>
-                <li>{{#link-to 'login'}}Login{{/link-to}}</li>
-                <li>{{#link-to 'profile'}}Profile{{/link-to}}</li>
-                <li>{{#link-to 'users.index'}}Users{{/link-to}}</li>
+                {{#if isAuthenticated}}
+                    <li>{{#link-to 'messages'}}Home{{/link-to}}</li>
+                    <li>{{#link-to 'profile'}}Profile{{/link-to}}</li>
+                    <li>{{#link-to 'users.index'}}Users{{/link-to}}</li>
+                    <li><a {{action 'logout'}}>Logout</a></li>
+                {{else}}
+                    <li>{{#link-to 'login'}}Login{{/link-to}}</li>
+                {{/if}}
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                     <ul class="dropdown-menu">

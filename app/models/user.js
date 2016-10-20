@@ -7,6 +7,7 @@ export default DS.Model.extend({
     firstname: DS.attr('string'),
     lastname: DS.attr('string'),
     gender: DS.attr('string'),
+    messages: DS.hasMany('message'),
     phoneMask: Ember.computed('phone', {
         get(key) {
             return this.get('phone');

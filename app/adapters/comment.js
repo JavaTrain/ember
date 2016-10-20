@@ -31,7 +31,7 @@ export default ApplicationAdapter.extend({
                 dataType: 'json',
                 data: data
             }).then(function(data) {
-                Ember.run(null, resolve/*, data*/);
+                Ember.run(null, resolve, data);
             }, function(jqXHR) {
                 jqXHR.then = null; // tame jQuery's ill mannered promises
                 Ember.run(null, reject, jqXHR);
@@ -48,7 +48,7 @@ export default ApplicationAdapter.extend({
                 dataType: 'json',
                 data: data
             }).then(function(data) {
-                Ember.run(null, resolve/*, data*/);
+                Ember.run(null, resolve, data);
             }, function(jqXHR) {
                 jqXHR.then = null; // tame jQuery's ill mannered promises
                 Ember.run(null, reject, jqXHR);

@@ -21,6 +21,7 @@ export default Ember.Component.extend({
             this.$('th').removeClass('sort_desc');
             this.$('#' + event.target.id).addClass(this.get('sortClass'));
             this.set('sortBy', event.target.id);
+            console.log(this.get('sort'));
             this.get('sort')(this.get('sortQuery'));
         }
     }

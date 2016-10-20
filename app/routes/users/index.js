@@ -9,10 +9,6 @@ export default Ember.Route.extend({
         limit: {
             as: 'limit',
             refreshModel: true
-        },
-        sort: {
-            as: 'sortBy',
-            refreshModel: true
         }
     },
 

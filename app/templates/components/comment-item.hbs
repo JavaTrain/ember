@@ -1,48 +1,45 @@
 {{#if comments}}
     <h1>{{user.firstname}}</h1>
     <h3>Comments: {{comments.length}}</h3>
-    {{#each comments as |comment|}}
-        <p>{{{comment.comment}}}</p>
-        {{# if (eq comment.commentedBy.id userId)}}
-            <button {{action 'deleteComment' comment}}>Delete</button>
-            <button {{action 'editComment' comment}}>Edit</button>
-        {{/if}}
-
-        {{# if (eq comment.id editComment)}}
-            <h2>Edit a comment</h2>
-            <div class="form-group">
-                <div class="col-sm-10">
+    <div>
+        {{#each comments as |comment|}}
+            <p>{{{comment.comment}}}</p>
+            {{# if (eq comment.commentedBy.id userId)}}
+                <button {{action 'deleteComment' comment}} class="btn btn-danger">Delete</button>
+                <button {{action 'editComment' comment}} class="btn">Edit</button>
+            {{/if}}
+            {{# if (eq comment.id editComment)}}
+                <h2>Edit comment</h2>
+                <div class="col-sm-12">
                     {{ember-cli-ckeditor
                     value=comment.comment
                     ckeditorConfig=ckeditorConfig
                     externalPlugins=externalCkeditorPlugins
                     }}
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
+                <div class="col-sm-12" style="margin-top: 20px">
                     <button type="submit" class="btn btn-default" {{action 'updateComment' comment}}>Update comment</button>
                 </div>
-            </div>
-        {{/if}}
-        <hr />
-    {{/each}}
+            {{/if}}
+            <hr />
+        {{/each}}
+    </div>
 {{/if}}
-<div>
-    <h2>Write a comment</h2>
-    <div class="form-group">
-        <div class="col-sm-10">
-            {{ember-cli-ckeditor
-            value=commentMsg
-            ckeditorConfig=ckeditorConfig
-            externalPlugins=externalCkeditorPlugins
-            }}
+{{#unless editComment}}
+    <div>
+        <h2>Write a comment</h2>
+        <div class="form-group">
+            <div class="col-sm-12">
+                {{ember-cli-ckeditor
+                value=commentMsg
+                ckeditorConfig=ckeditorConfig
+                externalPlugins=externalCkeditorPlugins
+                }}
+            </div>
         </div>
     </div>
-</div>
-<div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
+    <div class="col-sm-12" style="margin-top: 20px">
         <button type="submit" class="btn btn-default" {{action 'saveComment' commentMsg message}}>Post comment</button>
     </div>
-</div>
+{{/unless}}
 {{yield}}

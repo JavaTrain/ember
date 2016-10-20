@@ -6,19 +6,19 @@ export default Ember.Service.extend({
     store: Ember.inject.service(),
     accessToken: null,
     payload: null,
-
     initializeFromLocalStorage: function () {
         let accessToken = localStorage.getItem('accessToken');
-
         if (accessToken) {
             this.setAccessToken(accessToken);
         }
     }.on('init'),
-
     setAccessToken: function (accessToken) {
         this.set('accessToken', accessToken);
         localStorage.setItem('accessToken', accessToken);
         this.set('payload', JSON.parse(window.atob(accessToken.split('.')[1])));
+        setInterval(this.refreshToken, config.refreshTokenTime);
+    },
+    refreshToken: function () {
         setInterval(function(){
             Ember.$.ajax({
                 type: 'POST',
@@ -32,9 +32,8 @@ export default Ember.Service.extend({
             }, error => {
                 // reject(error);
             });
-        }, 120000);
+        }, config.refreshTokenTime);
     },
-
     getAuthCode() {
         let self = this;
         return self.get('torii').open('google-oauth2').then(
@@ -42,7 +41,6 @@ export default Ember.Service.extend({
                 return authorization.authorizationCode;
             });
     },
-
     getGoogleAccessToken(authorizationCode) {
         return Ember.$.post('https://www.googleapis.com/oauth2/v3/token',
             {
@@ -57,7 +55,6 @@ export default Ember.Service.extend({
             }
         );
     },
-
     authenticate() {
         return new Ember.RSVP.Promise((resolve, reject) => {
             this.getAuthCode().then(authorizationCode => {
@@ -84,11 +81,13 @@ export default Ember.Service.extend({
 
         });
     },
-
     logout() {
         this.set('accessToken', null);
+        this.set('payload', null);
         localStorage.removeItem('accessToken');
     },
+    isAuthenticated: Ember.computed('payload', function(){
+        return (this.payload && (new Date().getTime()/1000 < this.payload.exp));
 
-    isAuthenticated: Ember.computed.bool('accessToken')
+    })
 });

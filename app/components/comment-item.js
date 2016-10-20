@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
-const get = Ember.get;
-const set = Ember.set;
+// const get = Ember.get;
+// const set = Ember.set;
 
 export default Ember.Component.extend({
     authUser: Ember.inject.service(),
@@ -12,8 +12,8 @@ export default Ember.Component.extend({
      * Ckeditor configuration
      */
     ckeditorConfig: {
-        filebrowserImageUploadUrl : 'http://localhost:3000/api/v1/messages/upload/',
-        extraPlugins : ['uploadimage', 'smiley'],
+        filebrowserImageUploadUrl: 'http://localhost:3000/api/v1/messages/upload/',
+        extraPlugins: ['uploadimage', 'smiley'],
         uploadUrl: 'http://noadress',
     },
 
@@ -38,6 +38,9 @@ export default Ember.Component.extend({
 
                 comment.save();
             });
+            for (var key in CKEDITOR.instances) {
+                CKEDITOR.instances[key].setData("");
+            }
         },
         deleteComment(comment){
             let confirmation = confirm('Are you sure?');
@@ -45,12 +48,15 @@ export default Ember.Component.extend({
             if (confirmation) {
                 comment.destroyRecord();
             }
+            if (this.get('editComment') == comment.id) {
+                this.set('editComment', null);
+            }
         },
         editComment(comment){
-            if(this.get('editComment') === comment.id){
+            if (this.get('editComment') === comment.id) {
                 this.set('editComment', null);
-            }else{
-                this.set('editComment',comment.id);
+            } else {
+                this.set('editComment', comment.id);
             }
         },
         updateComment(comment){
