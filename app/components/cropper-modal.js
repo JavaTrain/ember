@@ -18,7 +18,6 @@ export default Ember.Component.extend({
             "class": "thumb-image"
         });
         cropper.appendTo(image_holder);
-        // var cr = new Cropper();
         cropper.promise().done(function() {
             cropper.cropper({
                 responsive: true,

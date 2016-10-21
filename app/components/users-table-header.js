@@ -15,13 +15,12 @@ export default Ember.Component.extend({
     },
 
     actions: {
-        sortColumn(event){
+        sortColumn(){
             this.toggleSortOrder();
             this.$('th').removeClass('sort_asc');
             this.$('th').removeClass('sort_desc');
             this.$('#' + event.target.id).addClass(this.get('sortClass'));
             this.set('sortBy', event.target.id);
-            console.log(this.get('sort'));
             this.get('sort')(this.get('sortQuery'));
         }
     }

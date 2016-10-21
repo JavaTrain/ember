@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+    // isShowingModalFileUpload: false,
     model(){
         return this.get('store').createRecord('message');
     },
@@ -10,6 +11,7 @@ export default Ember.Route.extend({
 
         controller.set('title', 'Create a new message');
         controller.set('buttonLabel', 'Create');
+        controller.set('isShowingModalFileUpload', false);
     },
 
     renderTemplate() {
@@ -18,7 +20,7 @@ export default Ember.Route.extend({
 
     actions: {
         saveMsg(newMsg){
-            newMsg.save().then(() => this.transitionTo('messages.index'))/*this.transitionTo('messages'))*/;
+            newMsg.save().then(() => this.transitionTo('messages.index'));
         },
 
         willTransition() {
@@ -30,5 +32,6 @@ export default Ember.Route.extend({
                 model.destroyRecord();
             }
         }
-    }
+    },
 });
+

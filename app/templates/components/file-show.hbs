@@ -1,8 +1,8 @@
-<div class="clearfix">
-    <div style="float: left" >
-        <img style="max-height: 100px; max-width: 100px" alt="{{file.originalName}}" src="{{file.link}}" />
-        <span {{action 'toggleModal' file }}>X</span>
-    </div>
+<div class="col-sm-2">
+    <img style="max-height: 150px; max-width: 150px" alt="{{file.originalName}}" src="{{file.link}}" />
+    {{# if (eq postedBy userId)}}
+        <span style="position: absolute" {{action 'toggleModal' file }} class="glyphicon glyphicon-remove"></span>
+    {{/if}}
 </div>
 {{#if isShowingModal}}
     {{#modal-window close="toggleModal" toggleModal=(action "toggleModal") size="md" header="Are you sure to delete the file?"}}

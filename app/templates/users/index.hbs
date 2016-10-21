@@ -1,13 +1,13 @@
 <div class="container">
-    <a href="#" class="left btn" {{action "prevPage"}}>&lt; Prev</a>
-    <a href="#" class="right btn" {{action "nextPage"}}> Next&gt;</a>
+    <a href="#" class="left btn" {{action "prevPage"}}><span class="glyphicon glyphicon-menu-left"></span>prev</a>
+    <a href="#" class="right btn" {{action "nextPage"}}>next<span class="glyphicon glyphicon-menu-right"></span></a>
 </div>
 <div role="content">
     <div class="widget-body no-padding">
         <div id="dt_basic_wrapper" class="dataTables_wrapper form-inline no-footer">
             <div class="input-group dataTables_filter col-sm-12">
                 <span class="input-group-addon" id="basic-addon1"><i class="fa fa-search"></i></span>
-                {{!--input value=filter key-up=(action 'search') class='form-control' placeholder='Search'--}}
+                {{input value=filter key-up=(action 'search') class='form-control' placeholder='Search'}}
             </div>
             <div class="tableWrap table-responsive">
                 <table id="dt_basic"

@@ -5,21 +5,20 @@ export default Ember.Controller.extend({
         'page',
         'limit',
         'sortBy',
-        'dir'
     ],
     page: 1, // default
     limit: 2,
-    sortBy: 'lastname',
-    dir: 'asc',
+    sortBy: '',
+
     store: Ember.inject.service(),
     filterUsers: function() {
         return this.get('store').query('user',
             {
-                sort: this.get('sortBy'),
-                // like: {
-                //     "email": this.get('filter'),
-                //     "name-for-filter": this.get('filter')
-                // }
+                sortBy: this.get('sortBy'),
+                like: {
+                    "email": this.get('filter'),
+                    "name-for-filter": this.get('filter')
+                }
             }
         ).then((result) => this.set('model', result));
     },
@@ -39,6 +38,7 @@ export default Ember.Controller.extend({
             } else {
                 this.set('page', page + 1);
             }
+            this.get('target').router.refresh();
         },
         prevPage(){
             let page = this.get('page');
@@ -47,6 +47,7 @@ export default Ember.Controller.extend({
             } else {
                 this.set('page', page - 1);
             }
+            this.get('target').router.refresh();
         }
     }
 

@@ -24,7 +24,6 @@ export default Ember.Component.extend({
             if (!el.value) {
                 return;
             }
-
             if (el.files && el.files[0]) {
                 let file = this.get('store').createRecord('file', {
                         name: get(el.files[0], 'name'),
@@ -38,11 +37,12 @@ export default Ember.Component.extend({
                 reader.onload = function (e) {
                     Ember.$('.preview').attr('src', '');
                     Ember.$('.upload').val('');
-                    Ember.$('.btn-upload').css({display: 'none'});
                     file.set('link', reader.result);
                     file.save();
                 };
                 reader.readAsDataURL(el.files[0]);
+
+                this.set('isShowingModalFileUpload', false);
             }
         },
         toggleModal: function (file) {

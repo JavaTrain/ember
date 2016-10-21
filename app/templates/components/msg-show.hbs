@@ -1,30 +1,37 @@
-<h1>{{message.title}}</h1>
-<p>{{{message.content}}}</p>
+<div class="container">
+    <h1>{{message.title}}</h1>
+    <p>{{{message.content}}}</p>
+    <div class="row">
+        {{#if message.files}}
+            {{#each message.files as |file|}}
+                {{file-show file=file postedBy=message.postedBy.id userId=userId}}
+            {{/each}}
+        {{/if}}
+    </div>
 
-{{#if message.files}}
-    {{#each message.files as |file|}}
-        {{#file-show file=file}}{{/file-show}}
-    {{/each}}
-{{/if}}
+    <div class="row">
+        <span {{action 'likeMessage'}}><span class="glyphicon glyphicon-thumbs-up"></span> : {{message.likes.length}}</span>
+    </div>
 
-<div>
-    <span {{action 'likeMessage'}}>Likes: {{message.likes.length}}</span>
-</div>
-
-{{#file-upload message=message}}{{/file-upload}}
-
-<div>
-    {{comment-item comments=message.comments message=message userId=userId}}
-</div>
-
-
-{{#if isShowingModal}}
-    {{#modal-window close="toggleModal" toggleModal=(action "toggleModal") size="md" header="Are you sure to delete the post?"}}
-        <div class="modal-footer">
-            <button {{action 'submitModal'}} data-dismiss="modal" class="btn btn-primary">Ok</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal" {{action 'toggleModal'}}>Close</button>
+    {{# if (eq message.postedBy.id userId)}}
+        <div class="row">
+            {{file-upload message=message userId=userId}}
         </div>
-    {{/modal-window}}
-{{/if}}
+    {{/if}}
 
-{{yield}}
+    <div class="row">
+        {{comment-item comments=message.comments message=message userId=userId}}
+    </div>
+
+
+    {{#if isShowingModal}}
+        {{#modal-window close="toggleModal" toggleModal=(action "toggleModal") size="md" header="Are you sure to delete the post?"}}
+            <div class="modal-footer">
+                <button {{action 'submitModal'}} data-dismiss="modal" class="btn btn-primary">Ok</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" {{action 'toggleModal'}}>Close</button>
+            </div>
+        {{/modal-window}}
+    {{/if}}
+
+    {{yield}}
+</div>

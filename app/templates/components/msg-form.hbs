@@ -15,10 +15,22 @@
             }}
         </div>
     </div>
+
+    {{# if item.files}}
+        {{#each item.files as |file|}}
+            {{file-show file=file}}
+        {{/each}}
+    {{/if}}
+
+    <div class="row">
+        {{file-upload message=item}}
+    </div>
+
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-default" {{action 'buttonClicked' item}} disabled={{unless item.isValid true}}>{{buttonLabel}}</button>
         </div>
     </div>
 </div>
+
 {{yield}}
