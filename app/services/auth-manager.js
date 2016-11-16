@@ -60,9 +60,10 @@ export default Ember.Service.extend({
             this.getAuthCode().then(authorizationCode => {
                     this.getGoogleAccessToken(authorizationCode).then(
                         response => {
+                            console.log(response.access_token,5555);
                             Ember.$.ajax({
                                 type: 'GET',
-                                url: 'http://localhost:3000/api/v1/users/login/login_with_google_token' + '?access_token=' + response.access_token,
+                                url: 'http://localhost:8088/api/v1/login_with_google_token' + '?access_token=' + response.access_token,
                                 dataType: 'json'
                             }).then(result => {
                                 this.setAccessToken(result.token);

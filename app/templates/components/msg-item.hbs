@@ -1,7 +1,7 @@
 <div class="panel panel-default">
     <div class="panel-body">
         {{#link-to "message" msg}}<h2>{{msg.title}}</h2>{{/link-to}}
-        <div>{{{msg.content}}}</div>
+        <div>{{{msg.body}}}</div>
         {{# if (eq msg.postedBy.id userId)}}
             <div class="text-right panel-footer">
                 {{#link-to 'messages.edit' msg class='btn btn-success btn-xs'}}Edit{{/link-to}}
