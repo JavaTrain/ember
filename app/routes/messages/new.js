@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Route.extend({
     // isShowingModalFileUpload: false,
     model(){
-        return this.get('store').createRecord('message');
+        return this.get('store').createRecord('page');
     },
 
     setupController: function (controller, model) {

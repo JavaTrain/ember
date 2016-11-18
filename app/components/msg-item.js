@@ -3,12 +3,9 @@ import Ember from 'ember';
 export default Ember.Component.extend({
     authUser: Ember.inject.service(),
     userId: null,
-    user: function () {
-        return this.get('authUser').getUser().then(user => {
-            this.set('userId', user.id);
-            return user;
-        });
-    }.on('init'),
+    user: Ember.computed(function () {
+        return this.get('authUser').get('user');
+    }),
 
     actions: {
         deleteMsg(message) {

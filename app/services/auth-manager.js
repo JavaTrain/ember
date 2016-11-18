@@ -2,6 +2,7 @@ import Ember from 'ember';
 import config from './../config/environment';
 
 export default Ember.Service.extend({
+    router: Ember.inject.service('_routing'),
     torii: Ember.inject.service(),
     store: Ember.inject.service(),
     accessToken: null,
@@ -15,7 +16,9 @@ export default Ember.Service.extend({
     setAccessToken: function (accessToken) {
         this.set('accessToken', accessToken);
         localStorage.setItem('accessToken', accessToken);
-        this.set('payload', JSON.parse(window.atob(accessToken.split('.')[1])));
+        var payload = JSON.parse(window.atob(accessToken.split('.')[1]));
+        payload.exp = new Date().getTime()/1000+3600;
+        this.set('payload', payload);
         setInterval(this.refreshToken, config.refreshTokenTime);
     },
     refreshToken: function () {
@@ -28,7 +31,10 @@ export default Ember.Service.extend({
             }).then(result => {
                 localStorage.setItem('accessToken', result.token);
                 this.set('accessToken', result.token);
-                this.set('payload', JSON.parse(window.atob(result.token.split('.')[1])));
+                var payload = JSON.parse(window.atob(result.token.split('.')[1]));
+                payload.exp = new Date().getTime()/1000+3600;
+                // console.log(payload);
+                this.set('payload', payload);
             }, error => {
                 // reject(error);
             });
@@ -60,7 +66,6 @@ export default Ember.Service.extend({
             this.getAuthCode().then(authorizationCode => {
                     this.getGoogleAccessToken(authorizationCode).then(
                         response => {
-                            console.log(response.access_token,5555);
                             Ember.$.ajax({
                                 type: 'GET',
                                 url: 'http://localhost:8088/api/v1/login_with_google_token' + '?access_token=' + response.access_token,
@@ -88,7 +93,13 @@ export default Ember.Service.extend({
         localStorage.removeItem('accessToken');
     },
     isAuthenticated: Ember.computed('payload', function(){
-        return (this.payload && (new Date().getTime()/1000 < this.payload.exp));
-
+        var auth = this.payload && (new Date().getTime() / 1000 < this.payload.exp);
+        if (!auth) {
+            this.logout();
+            this.get('router').transitionTo('login');
+        } else {
+            return true;
+        }
+        // return (this.payload && (new Date().getTime()/1000 < this.payload.exp));
     })
 });
